@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jhoreil Dimatulac | Portfolio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-bar" id="navbar">
+        <a href="#Home">Home</a>
+        <a href="#About">About</a>
+        <a href="#Projects">Projects</a>
+        <a href="#Skills">Skills</a>
+        <a href="#Contacts">Contacts</a>
+    </div>
+
+    <div id="Home">
+
+        <img id="picture" src="pfp.png" alt="Profile Picture">
+
+        <h1 id="name">Jhoreil Dimatulac!</h1>
+
+        <h2 id="future">Future Cybersecurity</h2>
+
+    </div>
+
+    <div id="About">
+
+        <h3>About Me</h3>
+
+        <p>
+            I am 19 years old from Bacoor Cavite and a Computer Science student
+            at Cavite State University Bacoor Campus.
+
+            I love games, running, lifting weights, and programming.
+            I'm learning HTML, CSS, JavaScript, Python, and Java.
+
+            I aim to become a skilled programmer and work in cybersecurity.
+        </p>
+
+    </div>
+
+    <div id="Projects">
+
+        <h3>My Projects</h3>
+
+        <div class="project-slider">
+
+            <button class="slider-btn" onclick="changeProject(-1)" aria-label="Previous project">
+                &#10094;
+            </button>
+
+            <div class="portfolio-card">
+
+                <div class="project active">
+                    <h4>Inventory System Java</h4>
+
+                    <p>
+                       A fully functional inventory system built with Java and MySQL.
+                       With CRUD operations, and a friendly user interface for managing products and stock levels.
+                    </p>
+
+                    <img src="project2.png" alt="Inventory System Java Project">
+                </div>
+
+                <div class="project">
+                    <h4>Youtube Mp3/Mp4 Downloader Python</h4>
+
+                    <p>
+                        A simple YouTube downloader made with Python.
+                        Download videos or audio from YouTube in Mp3 or Mp4 format.
+                    </p>
+
+                    <img src="project1.png" alt="Youtube Downloader Project">
+                </div>
+
+                <div class="project">
+                    <h4>Snake Game Python</h4>
+
+                    <p>
+                        A classic Snake game made with Python.
+                        Move the snake, eat food, and grow your score!
+                    </p>
+
+                    <img src="3.png" alt="Snake Game Project">
+                </div>
+
+            </div>
+
+            <button class="slider-btn" onclick="changeProject(1)" aria-label="Next project">
+                &#10095;
+            </button>
+
+        </div>
+
+        <div class="slider-dots" id="sliderDots"></div>
+
+    </div>
+
+    <div id="Skills">
+
+        <h3>Basic Skills</h3>
+
+        <div class="skill-list">
+            <div class="skill-item">HTML</div>
+            <div class="skill-item">CSS</div>
+            <div class="skill-item">Python</div>
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Networking</div>
+            <div class="skill-item">Computer Configuration</div>
+        </div>
+
+    </div>
+
+    <div id="Contacts">
+
+        <h3>Contact Me</h3>
+
+        <div class="icon-container">
+
+            <a class="icon-link" href="mailto:jhoreiltominesdimatulac@gmail.com">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+            <a class="icon-link"
+               href="https://www.instagram.com/void.jho/"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a class="icon-link"
+               href="https://github.com/JhoNull"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="binary-background"></div>
+
+    <script>
+
+        let currentProject = 0;
+
+        const projects = document.querySelectorAll('.project');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        function showProject(index) {
+
+            if (index >= projects.length) {
+                currentProject = 0;
+            } else if (index < 0) {
+                currentProject = projects.length - 1;
+            } else {
+                currentProject = index;
+            }
+
+            projects.forEach((project, i) => {
+                project.classList.toggle('active', i === currentProject);
+            });
+
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentProject);
+            });
+
+        }
+
+        function changeProject(direction) {
+            showProject(currentProject + direction);
+        }
+
+        projects.forEach((project, index) => {
+
+            const dot = document.createElement('span');
+
+            dot.classList.add('dot');
+
+            dot.setAttribute('aria-label', 'Go to project ' + (index + 1));
+
+            dot.addEventListener('click', () => {
+                showProject(index);
+            });
+
+            dotsContainer.appendChild(dot);
+
+        });
+
+        showProject(0);
+
+
+        function toggleMenu() {
+            document.getElementById('navbar').classList.toggle('show');
+        }
+
+        document.querySelectorAll('#navbar a').forEach(link => {
+
+            link.addEventListener('click', () => {
+                document.getElementById('navbar').classList.remove('show');
+            });
+
+        });
+
+
+        const binaryContainer = document.querySelector('.binary-background');
+        const profilePicture = document.getElementById('picture');
+
+        for (let i = 0; i < 100; i++) {
+
+            const binary = document.createElement('span');
+
+            binary.textContent = Math.random() > 0.5 ? '0' : '1';
+
+            binary.style.left = Math.random() * 100 + 'vw';
+
+            binary.style.animationDuration =
+                (Math.random() * 5 + 5) + 's';
+
+            binary.style.animationDelay =
+                (Math.random() * 5) + 's';
+
+            binary.style.fontSize =
+                (Math.random() * 10 + 12) + 'px';
+
+            binaryContainer.appendChild(binary);
+
+        }
+
+
+        function activatePinkMode() {
+            document.body.classList.add('pink-mode');
+        }
+
+        function deactivatePinkMode() {
+            document.body.classList.remove('pink-mode');
+        }
+
+        profilePicture.addEventListener('mouseenter', activatePinkMode);
+
+        profilePicture.addEventListener('mouseleave', deactivatePinkMode);
+
+        profilePicture.addEventListener('touchstart', () => {
+            document.body.classList.toggle('pink-mode');
+        });
+
+    </script>
+
+</body>
+</html>
